@@ -1,0 +1,701 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лапки в Дом - Платформа услуг для животных</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container">
+            <a class="navbar-brand logo-text" href="#"><i class="fa-solid fa-paw"></i> ЛАПКИ В ДОМ</a>
+
+            <div class="collapse navbar-collapse justify-content-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#services">Услуги</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#how-it-works">Как работает</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacts">Контакты</a></li>
+                </ul>
+            </div>
+
+            <div class="cart-icon">
+                <i class="fa-solid fa-shopping-bag"></i>
+                <span class="badge rounded-pill text-bg-warning">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section d-flex align-items-center text-center">
+        <div class="container text-white">
+            <h1 class="display-4 fw-bold mb-3">ЕДИНАЯ ПЛАТФОРМА УСЛУГ<br>ДЛЯ ДОМАШНИХ ЖИВОТНЫХ</h1>
+            <p class="lead mb-5">Ветеринары, передержка, выгул — всё в одном месте</p>
+
+            <div class="search-box mx-auto">
+                <div class="input-group">
+                    <input type="text" class="form-control rounded-pill search-input" placeholder="Передержка...">
+                    <button class="btn btn-warning rounded-circle search-btn" type="button">
+                        <i class="fa-solid fa-search text-white"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <h2 class="fw-bold">О НАС</h2>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="fw-bold">Более 100 проверенных специалистов</h5>
+                    <p class="small text-muted">Мы тщательно отбираем каждого кандидата для безопасности вашего питомца.</p>
+                    <a href="#" class="text-warning text-decoration-none small fw-bold">More Info &rarr;</a>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="fw-bold">Работаем 24/7</h5>
+                    <p class="small text-muted">Наши специалисты готовы прийти на помощь в любое время дня и ночи.</p>
+                    <a href="#" class="text-warning text-decoration-none small fw-bold">More Info &rarr;</a>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="fw-bold">Срочный подбор от 10 минут</h5>
+                    <p class="small text-muted">Быстро найдем специалиста, если у вас изменились планы.</p>
+                    <a href="#" class="text-warning text-decoration-none small fw-bold">More Info &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-5" style="background-color: #213555;">
+        <div class="container text-center text-white">
+            <h2 class="fw-bold mb-4">УСЛУГИ</h2>
+
+            <ul class="nav nav-pills justify-content-center mb-5 bg-white rounded-pill d-inline-flex p-1" id="servicesTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active rounded-pill px-4" id="pills-stay-tab" data-bs-toggle="pill" data-bs-target="#pills-stay" type="button" role="tab">Передержка</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4" id="pills-vet-tab" data-bs-toggle="pill" data-bs-target="#pills-vet" type="button" role="tab">Ветеринар</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4" id="pills-groom-tab" data-bs-toggle="pill" data-bs-target="#pills-groom" type="button" role="tab">Груминг</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4" id="pills-walk-tab" data-bs-toggle="pill" data-bs-target="#pills-walk" type="button" role="tab">Выгул</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4" id="pills-taxi-tab" data-bs-toggle="pill" data-bs-target="#pills-taxi" type="button" role="tab">Зоотакси</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent">
+
+                <div class="tab-pane fade show active" id="pills-stay" role="tabpanel">
+                    <!--<div class="row g-4 text-dark text-start">
+                        <div class="col-md-4 col-lg-3">
+                            <div class="expert-card shadow-sm border-0 h-100 bg-white">
+                                <div class="expert-img-container">
+                                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Анастасия">
+                                </div>
+                                <div class="card-body p-3">
+                                    <h5 class="fw-bold mb-1">Анастасия</h5>
+                                    <p class="small text-muted mb-2">Опыт 5 лет • Домашняя передержка</p>
+                                    <div class="text-warning small mb-3"><i class="fa-solid fa-star"></i> 5.0 (48 отзывов)</div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold h5 mb-0">от 500 ₽</span>
+                                        <button class="btn btn-warning btn-sm rounded-circle text-white"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div id="expertsCarousel" class="carousel slide" data-bs-ride="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row g-4 text-dark text-start">
+                                    <div class="col-md-4">
+                                        <div class="expert-card shadow-sm border-0 h-100 bg-white">
+                                            <div class="expert-img-container">
+                                                <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Анастасия">
+                                            </div>
+                                            <div class="card-body p-3">
+                                                <h5 class="fw-bold mb-1">Анастасия</h5>
+                                                <p class="small text-muted mb-2">Опыт 5 лет • Передержка</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="fw-bold h5 mb-0">от 500 ₽</span>
+                                                    <button class="btn btn-warning btn-sm rounded-circle text-white add-to-cart-btn"><i class="fa-solid fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="expert-card shadow-sm border-0 h-100 bg-white">
+                                            <div class="expert-img-container">
+                                                <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Елена">
+                                            </div>
+                                            <div class="card-body p-3">
+                                                <h5 class="fw-bold mb-1">Елена</h5>
+                                                <p class="small text-muted mb-2">Опыт 3 года • Передержка</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="fw-bold h5 mb-0">от 600 ₽</span>
+                                                    <button class="btn btn-warning btn-sm rounded-circle text-white add-to-cart-btn"><i class="fa-solid fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="expert-card shadow-sm border-0 h-100 bg-white">
+                                            <div class="expert-img-container">
+                                                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Виктор">
+                                            </div>
+                                            <div class="card-body p-3">
+                                                <h5 class="fw-bold mb-1">Виктор</h5>
+                                                <p class="small text-muted mb-2">Опыт 7 лет • Передержка</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="fw-bold h5 mb-0">от 800 ₽</span>
+                                                    <button class="btn btn-warning btn-sm rounded-circle text-white add-to-cart-btn"><i class="fa-solid fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div class="row g-4 text-dark text-start">
+                                    <div class="col-md-4">
+                                        <div class="expert-card shadow-sm border-0 h-100 bg-white">
+                                            <div class="expert-img-container">
+                                                <img src="https://images.unsplash.com/photo-1551730459-92db2a308d6a?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Игорь">
+                                            </div>
+                                            <div class="card-body p-3">
+                                                <h5 class="fw-bold mb-1">Игорь</h5>
+                                                <p class="small text-muted mb-2">Опыт 2 года • Передержка</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="fw-bold h5 mb-0">от 450 ₽</span>
+                                                    <button class="btn btn-warning btn-sm rounded-circle text-white add-to-cart-btn"><i class="fa-solid fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="expert-card shadow-sm border-0 h-100 bg-white">
+                                            <div class="expert-img-container">
+                                                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Ольга">
+                                            </div>
+                                            <div class="card-body p-3">
+                                                <h5 class="fw-bold mb-1">Ольга</h5>
+                                                <p class="small text-muted mb-2">Опыт 4 года • Передержка</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="fw-bold h5 mb-0">от 700 ₽</span>
+                                                    <button class="btn btn-warning btn-sm rounded-circle text-white add-to-cart-btn"><i class="fa-solid fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#expertsCarousel" data-bs-slide="prev" style="width: 5%; left: -50px;">
+                            <span class="carousel-control-prev-icon bg-warning rounded-circle" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#expertsCarousel" data-bs-slide="next" style="width: 5%; right: -50px;">
+                            <span class="carousel-control-next-icon bg-warning rounded-circle" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-vet" role="tabpanel">
+                    <div class="row g-4 text-dark text-start">
+                        <div class="col-md-4 col-lg-3">
+                            <div class="expert-card shadow-sm border-0 h-100 bg-white">
+                                <div class="expert-img-container">
+                                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Дмитрий">
+                                </div>
+                                <div class="card-body p-3">
+                                    <h5 class="fw-bold mb-1">Дмитрий</h5>
+                                    <p class="small text-muted mb-2">Ветеринар-хирург • Выезд на дом</p>
+                                    <div class="text-warning small mb-3"><i class="fa-solid fa-star"></i> 4.9 (102 отзыва)</div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold h5 mb-0">от 1 200 ₽</span>
+                                        <button class="btn btn-warning btn-sm rounded-circle text-white"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-groom" role="tabpanel">
+                    <div class="row g-4 text-dark text-start">
+                        <div class="col-md-4 col-lg-3">
+                            <div class="expert-card shadow-sm border-0 h-100 bg-white">
+                                <div class="expert-img-container">
+                                    <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Елена">
+                                </div>
+                                <div class="card-body p-3">
+                                    <h5 class="fw-bold mb-1">Елена</h5>
+                                    <p class="small text-muted mb-2">Грумер • Стрижка и гигиена</p>
+                                    <div class="text-warning small mb-3"><i class="fa-solid fa-star"></i> 4.8 (35 отзывов)</div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold h5 mb-0">от 1 500 ₽</span>
+                                        <button class="btn btn-warning btn-sm rounded-circle text-white"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-walk" role="tabpanel">
+                    <div class="row g-4 text-dark text-start">
+                        <div class="col-md-4 col-lg-3">
+                            <div class="expert-card shadow-sm border-0 h-100 bg-white">
+                                <div class="expert-img-container">
+                                    <img src="https://images.unsplash.com/photo-1551730459-92db2a308d6a?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Игорь">
+                                </div>
+                                <div class="card-body p-3">
+                                    <h5 class="fw-bold mb-1">Игорь</h5>
+                                    <p class="small text-muted mb-2">Активные прогулки • Дрессировка</p>
+                                    <div class="text-warning small mb-3"><i class="fa-solid fa-star"></i> 5.0 (21 отзыв)</div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold h5 mb-0">от 400 ₽</span>
+                                        <button class="btn btn-warning btn-sm rounded-circle text-white"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-taxi" role="tabpanel">
+                    <div class="row g-4 text-dark text-start">
+                        <div class="col-md-4 col-lg-3">
+                            <div class="expert-card shadow-sm border-0 h-100 bg-white">
+                                <div class="expert-img-container">
+                                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Виктор">
+                                </div>
+                                <div class="card-body p-3">
+                                    <h5 class="fw-bold mb-1">Виктор</h5>
+                                    <p class="small text-muted mb-2">Бережная перевозка • Оборудованное авто</p>
+                                    <div class="text-warning small mb-3"><i class="fa-solid fa-star"></i> 4.7 (15 отзывов)</div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold h5 mb-0">от 800 ₽</span>
+                                        <button class="btn btn-warning btn-sm rounded-circle text-white"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-groom" role="tabpanel">
+                <div class="row g-4 text-dark text-start justify-content-center">
+                    <p class="text-white text-center">Ищем лучших грумеров в вашем городе...</p>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-walk" role="tabpanel">
+            </div>
+
+            <div class="tab-pane fade" id="pills-taxi" role="tabpanel">
+            </div>
+
+        </div>
+        </div>
+    </section>
+
+    <!--<section id="services" class="py-5" style="background-color: #213555;">
+        <div class="container text-center text-white">
+            <h2 class="fw-bold mb-4">УСЛУГИ</h2>
+
+            <ul class="nav nav-pills justify-content-center mb-5 bg-white rounded-pill d-inline-flex p-1">
+                <li class="nav-item"><a class="nav-link active rounded-pill text-dark fw-bold" href="#">Передержка</a></li>
+                <li class="nav-item"><a class="nav-link rounded-pill text-secondary" href="#">Ветеринар</a></li>
+                <li class="nav-item"><a class="nav-link rounded-pill text-secondary" href="#">Груминг</a></li>
+                <li class="nav-item"><a class="nav-link rounded-pill text-secondary" href="#">Выгул</a></li>
+                <li class="nav-item"><a class="nav-link rounded-pill text-secondary" href="#">Зоотакси</a></li>
+            </ul>
+
+            <div class="row text-dark text-start">
+                <div class="col-md-3 mb-4">
+                    <div class="card border-0 rounded-4 shadow-sm p-2">
+                        <div style="height: 200px; background-color: #ddd; border-radius: 10px;" class="mb-3"></div>
+                        <h5 class="fw-bold px-2">Анастасия</h5>
+                        <p class="text-warning px-2 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></p>
+                        <div class="d-flex justify-content-between align-items-center px-2">
+                            <span class="fw-bold h5 mb-0">$ 392</span>
+                            <button class="btn btn-dark rounded-circle btn-sm"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <a href="#" class="text-warning text-decoration-none fw-bold">Посмотреть все &rarr;</a>
+            </div>
+        </div>
+    </section>-->
+    <!--<section class="py-5" style="background-color: #f8f9fa;">
+        <div class="container text-center">
+            <div class="p-5 border-dashed rounded-4">
+                <h2 class="fw-bold">Работаем ли мы в г. <span id="user-city" class="text-warning">...</span>?</h2>
+                <p class="lead mt-3">
+                    Да! Наша платформа охватывает всю Россию. <br>
+                    Прямо сейчас в вашем городе доступно более 15 свободных специалистов.
+                </p>
+                <a href="#contacts" class="btn btn-outline-dark rounded-pill px-4 mt-2">Проверить наличие мест</a>
+            </div>
+        </div>
+    </section>-->
+    <section class="py-5" style="background-color: #f8f9fa;">
+        <div class="container text-center">
+            <div class="p-4 p-md-5 border-dashed rounded-4">
+                <h2 class="fw-bold">Работаем ли мы в г. <span id="user-city" class="text-warning">...</span>?</h2>
+                <p class="lead mt-3">Да! Наши специалисты уже дежурят в вашем районе.</p>
+
+                <div id="map" class="mt-4 shadow-sm rounded-4" style="height: 400px; width: 100%; z-index: 1;"></div>
+
+                <a href="#contacts" class="btn btn-outline-dark rounded-pill px-4 mt-4">Найти специалиста рядом</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="urgency-section py-5">
+        <div class="container">
+            <div class="urgency-card d-flex flex-column flex-md-row align-items-center justify-content-between p-4 p-md-5 rounded-4 shadow-lg text-white">
+
+                <div class="d-flex align-items-center flex-column flex-md-row text-center text-md-start">
+                    <div class="urgency-icon-box mb-3 mb-md-0 me-md-4">
+                        <i class="fa-solid fa-bolt-lightning fa-3x text-warning"></i>
+                    </div>
+
+                    <div>
+                        <h2 class="fw-bold mb-1">НУЖНО СРОЧНО?</h2>
+                        <p class="lead mb-0 opacity-75">Подберём проверенного специалиста всего за <span class="fw-bold text-warning">10-30 минут</span></p>
+                    </div>
+                </div>
+
+                <div class="mt-4 mt-md-0">
+                    <a href="#contacts" class="btn btn-warning btn-lg rounded-pill fw-bold text-white px-5 py-3 shadow-sm pulse-button">
+                        Найти сейчас
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!--<section id="trust-experts" class="py-5 bg-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">НАДЕЖНЫЕ СПЕЦИАЛИСТЫ РЯДОМ</h2>
+                <p class="text-muted">Все наши исполнители проходят проверку документов и личное собеседование</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4 col-lg-3">
+                    <div class="expert-card shadow-sm border-0 h-100 position-relative">
+                        <span class="badge bg-success position-absolute top-0 end-0 m-3"><i class="fa-solid fa-check-double"></i> Проверен</span>
+
+                        <div class="expert-img-container">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Анастасия" class="card-img-top">
+                        </div>
+
+                        <div class="card-body p-3">
+                            <h5 class="fw-bold mb-1">Анастасия</h5>
+                            <p class="small text-muted mb-2">Передержка, выгул</p>
+
+                            <div class="text-warning small mb-3">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <span class="text-dark ms-1">(48 отзывов)</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold h5 mb-0">от 500 ₽</span>
+                                <button class="btn btn-outline-warning btn-sm rounded-pill px-3">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-3">
+                    <div class="expert-card shadow-sm border-0 h-100 position-relative">
+                        <span class="badge bg-success position-absolute top-0 end-0 m-3"><i class="fa-solid fa-check-double"></i> Проверен</span>
+                        <div class="expert-img-container">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Дмитрий" class="card-img-top">
+                        </div>
+                        <div class="card-body p-3">
+                            <h5 class="fw-bold mb-1">Дмитрий</h5>
+                            <p class="small text-muted mb-2">Ветеринар на дом</p>
+                            <div class="text-warning small mb-3">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                                <span class="text-dark ms-1">(102 отзыва)</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold h5 mb-0">от 1 200 ₽</span>
+                                <button class="btn btn-outline-warning btn-sm rounded-pill px-3">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>-->
+    <section id="trust-list" class="py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="fw-bold display-5">НАДЕЖНЫЕ СПЕЦИАЛИСТЫ РЯДОМ</h2>
+                    <p class="lead text-muted">Мы берем на себя проверку каждого исполнителя, чтобы вы были спокойны за своего питомца.</p>
+                </div>
+
+                <div class="col-lg-6">
+                    <ul class="list-unstyled">
+                        <li class="d-flex align-items-center mb-4 p-3 shadow-sm rounded-4 border-start border-warning border-4">
+                            <div class="bg-warning-subtle p-3 rounded-circle me-3">
+                                <i class="fa-solid fa-check text-warning fs-4"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-0">Проверка документов</h5>
+                                <p class="text-muted small mb-0">Паспортные данные и благонадежность подтверждены</p>
+                            </div>
+                        </li>
+
+                        <li class="d-flex align-items-center mb-4 p-3 shadow-sm rounded-4 border-start border-warning border-4">
+                            <div class="bg-warning-subtle p-3 rounded-circle me-3">
+                                <i class="fa-solid fa-check text-warning fs-4"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-0">Реальные отзывы</h5>
+                                <p class="text-muted small mb-0">Только честные мнения от реальных владельцев животных</p>
+                            </div>
+                        </li>
+
+                        <li class="d-flex align-items-center p-3 shadow-sm rounded-4 border-start border-warning border-4">
+                            <div class="bg-warning-subtle p-3 rounded-circle me-3">
+                                <i class="fa-solid fa-check text-warning fs-4"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-0">Рейтинг специалистов</h5>
+                                <p class="text-muted small mb-0">Прозрачная система оценки качества каждой услуги</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-5" style="background-color: #fdfdfd;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">ОТЗЫВЫ НАШИХ КЛИЕНТОВ</h2>
+                <div class="text-warning fs-4">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <span class="text-dark fs-6 ms-2">4.9 / 5 на основе 200+ отзывов</span>
+                </div>
+            </div>
+
+            <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="review-card p-5 shadow-sm rounded-4 bg-white text-center position-relative">
+                                    <i class="fa-solid fa-quote-left position-absolute top-0 start-0 m-4 opacity-10 fs-1"></i>
+
+                                    <p class="lead italic mb-4">"Очень переживала, когда оставляла своего шпица на время отпуска. Но Анастасия каждый день присылала видеоотчеты. Собака довольна, я спокойна! Теперь только сюда."</p>
+
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Клиент" class="rounded-circle me-3" width="60">
+                                        <div class="text-start">
+                                            <h6 class="fw-bold mb-0">Мария С.</h6>
+                                            <small class="text-muted">Хозяйка шпица Арни</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="review-card p-5 shadow-sm rounded-4 bg-white text-center position-relative">
+                                    <i class="fa-solid fa-quote-left position-absolute top-0 start-0 m-4 opacity-10 fs-1"></i>
+                                    <p class="lead italic mb-4">"Вызывал ветеринара на дом для прививки. Врач приехал вовремя, всё сделал быстро и профессионально. Очень удобно, что не пришлось ехать в клинику и нервировать кота."</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704e" alt="Клиент" class="rounded-circle me-3" width="60">
+                                        <div class="text-start">
+                                            <h6 class="fw-bold mb-0">Александр П.</h6>
+                                            <small class="text-muted">Владелец мейн-куна Бориса</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-5">КАК ЭТО РАБОТАЕТ?</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="step-icon mb-3 mx-auto shadow-sm">
+                        <i class="fa-solid fa-mobile-screen-button fs-2 text-warning"></i>
+                    </div>
+                    <h5 class="fw-bold">1. Оставьте заявку</h5>
+                    <p class="text-muted small">Выберите нужную услугу и заполните короткую форму на сайте.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="step-icon mb-3 mx-auto shadow-sm">
+                        <i class="fa-solid fa-magnifying-glass fs-2 text-warning"></i>
+                    </div>
+                    <h5 class="fw-bold">2. Мы подберем специалиста</h5>
+                    <p class="text-muted small">Система автоматически найдет лучшего исполнителя рядом с вами.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="step-icon mb-3 mx-auto shadow-sm">
+                        <i class="fa-solid fa-paw fs-2 text-warning"></i>
+                    </div>
+                    <h5 class="fw-bold">3. Питомец в надежных руках</h5>
+                    <p class="text-muted small">Специалист свяжется с вами, а вы сможете спокойно заниматься своими делами.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="safety-payment" class="py-5 bg-white">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-6">
+                    <h3 class="fw-bold mb-4">ВАША БЕЗОПАСНОСТЬ — НАШ ПРИОРИТЕТ</h3>
+                    <div class="d-flex mb-4">
+                        <div class="me-3 text-warning">
+                            <i class="fa-solid fa-shield-dog fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">Страхование питомцев</h5>
+                            <p class="text-muted small">Каждый визит или передержка застрахованы на сумму до 50 000 ₽ на случай непредвиденных обстоятельств.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-4">
+                        <div class="me-3 text-warning">
+                            <i class="fa-solid fa-user-shield fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">Проверка по 15 параметрам</h5>
+                            <p class="text-muted small">Мы проверяем паспортные данные, наличие судимостей и проводим психологическое тестирование каждого ситтера.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h3 class="fw-bold mb-4">ОПЛАТА УСЛУГ</h3>
+                    <p class="text-muted">Мы используем систему «Безопасная сделка». Деньги хранятся на платформе и переводятся исполнителю только после того, как вы подтвердите, что услуга оказана качественно.</p>
+
+                    <div class="payment-methods bg-light p-4 rounded-4 mt-4">
+                        <h6 class="fw-bold mb-3">Доступные способы:</h6>
+                        <div class="d-flex flex-wrap gap-3 fs-3 text-secondary">
+                            <i class="fa-brands fa-cc-visa" title="Visa"></i>
+                            <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+                            <i class="fa-solid fa-credit-card" title="МИР"></i>
+                            <i class="fa-solid fa-mobile-screen" title="СБП"></i>
+                        </div>
+                        <p class="small text-muted mt-3 mb-0"><i class="fa-solid fa-lock me-1"></i> Все платежи защищены сертификатом SSL и соответствуют стандарту PCI DSS.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts" class="py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center bg-white rounded-4 shadow-sm p-4 border">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h2 class="fw-bold mb-3">Остались вопросы?</h2>
+                    <p class="text-muted">Оставьте свои контакты, и наш менеджер свяжется с вами в течение 5 минут для бесплатной консультации.</p>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mb-2"><i class="fa-solid fa-phone text-warning me-2"></i> +7 (999) 123-45-67</li>
+                        <li class="mb-2"><i class="fa-solid fa-envelope text-warning me-2"></i> info@lapki-v-dom.ru</li>
+                        <li><i class="fa-solid fa-location-dot text-warning me-2"></i> г. Москва, ул. Примерная, д. 1</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <form class="contact-form p-4 bg-light rounded-4">
+                        <div class="mb-3">
+                            <label for="userName" class="form-label small fw-bold">Ваше имя</label>
+                            <input type="text" class="form-control rounded-pill" id="userName" placeholder="Иван Иванов">
+                        </div>
+                        <div class="mb-3">
+                            <label for="userPhone" class="form-label small fw-bold">Телефон</label>
+                            <input type="tel" class="form-control rounded-pill" id="userPhone" placeholder="+7 (___) ___-__-__">
+                        </div>
+                        <div class="mb-4">
+                            <label for="userService" class="form-label small fw-bold">Интересующая услуга</label>
+                            <select class="form-select rounded-pill" id="userService">
+                                <option selected>Выберите услугу...</option>
+                                <option value="1">Передержка</option>
+                                <option value="2">Ветеринар</option>
+                                <option value="3">Выгул</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100 rounded-pill fw-bold text-white py-2">Оставить заявку</button>
+                        <p class="text-center small text-muted mt-3 mb-0">Нажимая на кнопку, вы даете согласие на обработку персональных данных.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-white py-4" style="background-color: #1a273f;">
+        <div class="container text-center">
+            <h4 class="fw-bold mb-3" style="color: #F89F1E;"><i class="fa-solid fa-paw"></i> ЛАПКИ В ДОМ</h4>
+            <p class="small text-secondary mb-3">© 2023-2024 Платформа услуг для домашних животных. Все права защищены.</p>
+            <div class="social-links">
+                <a href="#" class="text-secondary mx-2 fs-5"><i class="fa-brands fa-vk"></i></a>
+                <a href="#" class="text-secondary mx-2 fs-5"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="text-secondary mx-2 fs-5"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

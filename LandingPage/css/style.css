@@ -1,0 +1,378 @@
+﻿body {
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+}
+/* ================= СТИЛИ ШАПКИ ================= */
+.custom-navbar {
+    position: absolute; /* Шапка наезжает на фоновую картинку */
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    padding: 20px 0;
+}
+
+.logo-text {
+    color: #FFA500 !important; /* Оранжевый цвет бренда */
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: #fff !important;
+    font-weight: 600;
+    margin: 0 10px;
+    font-size: 0.9rem;
+}
+
+.cart-icon {
+    position: relative;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+    .cart-icon .badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        font-size: 0.6rem;
+    }
+
+/* ================= СТИЛИ ГЛАВНОГО ЭКРАНА ================= */
+.hero-section {
+    /* ВАЖНО: Замените 'img/hero-bg.jpg' на путь к вашей сохраненной картинке */
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    height: 80vh; /* Высота экрана 80% */
+    min-height: 600px;
+    padding-top: 80px; /* Отступ под шапку */
+}
+
+/* Настройка поисковой строки */
+.search-box {
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px;
+    border-radius: 50px;
+    backdrop-filter: blur(5px); /* Эффект размытия как в макете */
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding-left: 20px;
+}
+
+    .search-input::placeholder {
+        color: #eee;
+    }
+
+    .search-input:focus {
+        background: transparent;
+        color: #fff;
+        box-shadow: none;
+    }
+
+.search-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+/* Стили для вкладок услуг */
+#servicesTabs {
+    border: none;
+}
+
+    #servicesTabs .nav-link {
+        color: #213555 !important; /* Цвет текста неактивной кнопки */
+        border: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        #servicesTabs .nav-link.active {
+            background-color: #F89F1E !important; /* Цвет активной кнопки (оранжевый) */
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(248, 159, 30, 0.4);
+        }
+
+/* Настройка карточек внутри секции Услуги */
+#services .expert-card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#services .expert-img-container {
+    height: 200px;
+}
+
+/* Делаем стрелочки карусели специалистов заметными */
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+    background-size: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#expertsCarousel {
+    padding: 0 40px; /* Отступы, чтобы стрелки были за пределами карточек */
+}
+
+/* Анимация для кнопки при смене иконки */
+.add-to-cart-btn {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Анимация при клике */
+.btn-clicked {
+    transform: scale(0.9); /* Кнопка слегка уменьшается при нажатии */
+    transition: all 0.2s ease;
+}
+
+/* Сделаем смену цвета плавной */
+.add-to-cart-btn {
+    transition: background-color 0.4s ease, transform 0.2s ease !important;
+}
+
+/* Стиль для кнопки после выбора */
+.btn-success {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+}
+
+/* ================= СТИЛИ ВЛОЖЕННЫХ КНОПОК И ЦВЕТОВ ================= */
+.text-warning {
+    color: #F89F1E !important; /* Точный оранжевый из макета */
+}
+
+.btn-warning {
+    background-color: #F89F1E;
+    border-color: #F89F1E;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #fff !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.border-dashed {
+    border: 2px dashed #dee2e6; /* Пунктирная рамка для акцента */
+    background-color: #ffffff;
+}
+
+#user-city {
+    border-bottom: 2px solid #F89F1E; /* Подчеркивание города */
+    padding-bottom: 2px;
+}
+
+/* ================= СТИЛИ БЛОКА СРОЧНОСТЬ ================= */
+.urgency-card {
+    background-color: #213555; /* Тёмно-синий из вашей цветовой схемы */
+    border-left: 8px solid #F89F1E; /* Оранжевая акцентная линия слева */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Круг под иконкой для эффекта глубины */
+.urgency-icon-box {
+    background: rgba(255, 255, 255, 0.1);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Анимация пульсации для кнопки, чтобы привлечь внимание */
+.pulse-button {
+    animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+    0% {
+        box-shadow: 0 0 0 0 rgba(248, 159, 30, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(248, 159, 30, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(248, 159, 30, 0);
+    }
+}
+
+/* Добавим небольшой декоративный элемент на фоне */
+.urgency-card::after {
+    content: "\f1b0"; /* Иконка лапки FontAwesome */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    font-size: 150px;
+    color: rgba(255, 255, 255, 0.03); /* Почти прозрачная лапка на фоне */
+    transform: rotate(-20deg);
+}
+
+/* ================= СТИЛИ КАРТОЧЕК ДОВЕРИЯ ================= */
+.expert-card {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: #fff;
+    border: 1px solid #f0f0f0;
+}
+
+    /* Эффект при наведении на карточку */
+    .expert-card:hover {
+        transform: translateY(-10px); /* Карточка приподнимается */
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+
+.expert-img-container {
+    height: 250px;
+    overflow: hidden;
+}
+
+    .expert-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Фото заполнит область, не растягиваясь */
+        transition: transform 0.5s ease;
+    }
+
+.expert-card:hover .expert-img-container img {
+    transform: scale(1.1); /* Легкий зум фото при наведении */
+}
+
+.expert-card .badge {
+    z-index: 2;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+    background-color: rgba(40, 167, 69, 0.85) !important; /* Полупрозрачный зеленый */
+}
+
+/* Стили для списка доверия */
+.bg-warning-subtle {
+    background-color: rgba(248, 159, 30, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+}
+
+#trust-list li {
+    transition: transform 0.3s ease;
+    background: #fff;
+}
+
+    #trust-list li:hover {
+        transform: translateX(10px); /* При наведении пункт чуть сдвигается вправо */
+    }
+
+.border-warning {
+    border-color: #F89F1E !important;
+}
+/* ================= СТИЛИ ОТЗЫВОВ ================= */
+.review-card {
+    border: 1px solid #f0f0f0;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .review-card p {
+        font-style: italic;
+        color: #555;
+    }
+
+/* Настройка иконок управления каруселью, чтобы они не перекрывали текст на узких экранах */
+.carousel-control-prev, .carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    width: 35px;
+    height: 35px;
+    background-size: 50%;
+}
+
+/* Декоративная иконка кавычки */
+.fa-quote-left {
+    color: #F89F1E;
+    font-size: 4rem !important;
+}
+
+/* ================= СТИЛИ БЛОКА "КАК РАБОТАЕТ" ================= */
+.step-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease; /* Плавная анимация при наведении */
+}
+
+/* ================= СТИЛИ БЕЗОПАСНОСТИ И ОПЛАТЫ ================= */
+#safety-payment h3 {
+    letter-spacing: -1px;
+}
+
+.payment-methods i {
+    transition: color 0.3s ease;
+    cursor: help;
+}
+
+    .payment-methods i:hover {
+        color: #F89F1E; /* Иконки платежных систем "подсвечиваются" при наведении */
+    }
+
+.fa-shield-dog, .fa-user-shield {
+    width: 40px; /* Фиксируем ширину, чтобы текст шел ровно в ряд */
+    text-align: center;
+}
+
+/* Декоративный эффект для правой колонки */
+.payment-methods {
+    border: 1px solid #e0e0e0;
+    position: relative;
+}
+
+    /* При наведении мыши иконка будет слегка подниматься (эффект интерактивности) */
+    .step-icon:hover {
+        transform: translateY(-10px);
+    }
+
+/* ================= СТИЛИ ФОРМЫ (КОНТАКТЫ) ================= */
+.contact-form {
+    border: 1px solid #eee;
+}
+
+    .contact-form .form-control,
+    .contact-form .form-select {
+        padding: 10px 20px; /* Делаем поля ввода более пухлыми и современными */
+        font-size: 0.9rem;
+    }
+
+        .contact-form .form-control:focus,
+        .contact-form .form-select:focus {
+            border-color: #F89F1E; /* Оранжевая рамка при клике на поле */
+            box-shadow: 0 0 0 0.25rem rgba(248, 159, 30, 0.25); /* Оранжевое свечение */
+        }
+
+/* ================= СТИЛИ ПОДВАЛА ================= */
+footer .social-links a {
+    transition: color 0.3s ease;
+}
+
+    footer .social-links a:hover {
+        color: #F89F1E !important; /* Иконки соцсетей становятся оранжевыми при наведении */
+    }
