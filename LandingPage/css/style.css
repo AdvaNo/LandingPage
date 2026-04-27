@@ -410,3 +410,14 @@ footer .social-links a {
         bottom: 90px;
     }
 }
+
+.expert-card .fa-star,
+.expert-card .fa-star-half-stroke {
+    color: #ffc107; /* Ярко-желтый цвет для рейтинга */
+    font-size: 0.85rem;
+}
+
+.expert-card .text-muted {
+    font-size: 0.75rem;
+    margin-left: 5px;
+}

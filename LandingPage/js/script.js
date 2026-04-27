@@ -25,7 +25,26 @@
                     center: [lat, lon], zoom: 12, controls: ['zoomControl']
                 }, { suppressMapOpenBlock: true });
                 myMap.geoObjects.add(new ymaps.Placemark([lat, lon], { balloonContent: `Мы в г. ${city}!` }, { preset: 'islands#warningIcon' }));
+                // 1. Создаем массив с рандомными специалистами (координаты чуть смещены от центра)
+                const experts = [
+                    { coords: [lat + 0.01, lon + 0.02], name: "Анастасия (Груминг)", category: "grooming" },
+                    { coords: [lat - 0.015, lon - 0.01], name: "Дмитрий (Ветеринар)", category: "vet" },
+                    { coords: [lat + 0.02, lon - 0.015], name: "Елена (Выгул)", category: "walk" },
+                    { coords: [lat - 0.02, lon + 0.01], name: "Иван (Зоотакси)", category: "taxi" }
+                ];
+
+                // 2. Добавляем каждого специалиста на карту
+                experts.forEach(expert => {
+                    const placemark = new ymaps.Placemark(expert.coords, {
+                        balloonContent: `<strong>${expert.name}</strong><br>Доступен для заказа`
+                    }, {
+                        preset: 'islands#yellowStretchyIcon' // Желтый стиль под твой сайт
+                    });
+
+                    myMap.geoObjects.add(placemark);
+                });
                 myMap.behaviors.disable('scrollZoom');
+
             });
         }
     }
