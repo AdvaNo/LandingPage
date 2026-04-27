@@ -224,6 +224,7 @@
             e.preventDefault();
             if (cart.length === 0) return showCartMessage("Корзина пуста!", "warning");
             showCartMessage("✨ Заказ оформлен!", "success");
+            ym(108784033, 'reachGoal', 'order_success')
             cart = []; updateCartUI(); checkoutForm.reset();
         });
     }
