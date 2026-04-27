@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showCartMessage("✨ Заказ оформлен! Менеджер свяжется с вами в течение 10 минут.", "success");
 
             ym(108784033, 'reachGoal', 'order_success');
-
+            
             // 4. Очистка корзины и данных
             cart = []; // Очищаем массив
             updateCartUI(); // Обновляем интерфейс (счетчик и список)
@@ -138,103 +138,212 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    //document.addEventListener('click', function (e) {
+    //    // Добавление в корзину
+    //    const addBtn = e.target.closest('.add-to-cart-btn');
+    //    if (addBtn) {
+    //        const card = addBtn.closest('.expert-card');
+    //        const expertName = card.querySelector('h5').textContent;
+    //        const priceText = card.querySelector('.fw-bold.h5').textContent;
+    //        const expertPrice = parseInt(priceText.replace(/\D/g, ''));
+
+    //        cart.push({ name: expertName, price: expertPrice });
+    //        updateCartUI();
+
+    //        const icon = addBtn.querySelector('i');
+    //        if (icon) icon.classList.replace('fa-plus', 'fa-check');
+    //        addBtn.classList.replace('btn-warning', 'btn-success');
+    //        console.log("Добавлено:", expertName);
+    //    }
+
+    //    // Удаление из корзины
+    //    const removeBtn = e.target.closest('.remove-btn');
+    //    if (removeBtn) {
+    //        const index = removeBtn.getAttribute('data-index');
+    //        cart.splice(index, 1);
+    //        updateCartUI();
+    //    }
+
+    //    // ОТКРЫТИЕ/ЗАКРЫТИЕ ЧАТА (Больше не закомментировано!)
+    //    const chatToggleBtn = e.target.closest('#chat-toggle-btn');
+    //    const chatCloseBtn = e.target.closest('#chat-close-btn');
+    //    const chatWindow = document.getElementById('chat-window');
+
+    //    if (chatToggleBtn && chatWindow) {
+    //        chatWindow.classList.toggle('d-none');
+    //    }
+    //    if (chatCloseBtn && chatWindow) {
+    //        chatWindow.classList.add('d-none');
+    //    }
+
+    //    // ==========================================
+    //    // ЛОГИКА ПОИСКА ПО САЙТУ
+    //    // ==========================================
+    //    const searchInput = document.getElementById('main-search-input');
+    //    const searchBtn = document.getElementById('main-search-btn');
+
+    //    // Словарь: что ищем -> какой ID вкладки открываем
+    //    const searchMap = {
+    //        'вет': '#pills-vet',
+    //        'врач': '#pills-vet',
+    //        'передерж': '#pills-home',
+    //        'отель': '#pills-home',
+    //        'выгул': '#pills-walk',
+    //        'погуля': '#pills-walk',
+    //        'грум': '#pills-grooming',
+    //        'стриж': '#pills-grooming',
+    //        'такси': '#pills-taxi',
+    //        'машин': '#pills-taxi'
+    //    };
+
+    //    function performSearch() {
+    //        if (!searchInput) return;
+    //        const query = searchInput.value.toLowerCase().trim();
+
+    //        if (query === "") return;
+
+    //        let found = false;
+
+    //        // Проверяем наш словарь на совпадения
+    //        for (let key in searchMap) {
+    //            if (query.includes(key)) {
+    //                const targetTabId = searchMap[key];
+    //                const tabTrigger = document.querySelector(`button[data-bs-target="${targetTabId}"]`);
+
+    //                if (tabTrigger) {
+    //                    // 1. Кликаем по нужной вкладке
+    //                    tabTrigger.click();
+    //                    // 2. Скроллим к разделу услуг
+    //                    document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+    //                    found = true;
+    //                    break;
+    //                }
+    //            }
+    //        }
+
+    //        if (!found) {
+    //            alert("Услуга не найдена. Попробуйте ввести: Ветеринар, Груминг, Выгул или Такси");
+    //        }
+    //    }
+
+    //    // Поиск по клику на лупу
+    //    if (searchBtn) searchBtn.onclick = performSearch;
+
+    //    // Поиск по нажатию Enter
+    //    if (searchInput) {
+    //        searchInput.onkeypress = (e) => {
+    //            if (e.key === 'Enter') performSearch();
+    //        };
+    //    }
+    //});
+
     document.addEventListener('click', function (e) {
-        // Добавление в корзину
+
+        // ==========================================
+        // 1. ДОБАВЛЕНИЕ / УДАЛЕНИЕ ИЗ КОРЗИНЫ (Toggle)
+        // ==========================================
         const addBtn = e.target.closest('.add-to-cart-btn');
         if (addBtn) {
             const card = addBtn.closest('.expert-card');
             const expertName = card.querySelector('h5').textContent;
-            const priceText = card.querySelector('.fw-bold.h5').textContent;
-            const expertPrice = parseInt(priceText.replace(/\D/g, ''));
-
-            cart.push({ name: expertName, price: expertPrice });
-            updateCartUI();
-
             const icon = addBtn.querySelector('i');
-            if (icon) icon.classList.replace('fa-plus', 'fa-check');
-            addBtn.classList.replace('btn-warning', 'btn-success');
-            console.log("Добавлено:", expertName);
+
+            // Проверяем, добавлена ли уже услуга (по классу кнопки)
+            if (addBtn.classList.contains('btn-success')) {
+                // УДАЛЯЕМ, если уже нажата
+                cart = cart.filter(item => item.name !== expertName);
+
+                // Возвращаем прежний вид
+                if (icon) icon.classList.replace('fa-check', 'fa-plus');
+                addBtn.classList.replace('btn-success', 'btn-warning');
+                console.log("Удалено из корзины:", expertName);
+            } else {
+                // ДОБАВЛЯЕМ
+                const priceText = card.querySelector('.fw-bold.h5').textContent;
+                const expertPrice = parseInt(priceText.replace(/\D/g, ''));
+
+                cart.push({ name: expertName, price: expertPrice });
+
+                // Меняем вид на "Выбрано"
+                if (icon) icon.classList.replace('fa-plus', 'fa-check');
+                addBtn.classList.replace('btn-warning', 'btn-success');
+                console.log("Добавлено в корзину:", expertName);
+            }
+            updateCartUI();
         }
 
-        // Удаление из корзины
+        // Удаление через кнопку "удалить" в самой корзине
         const removeBtn = e.target.closest('.remove-btn');
         if (removeBtn) {
             const index = removeBtn.getAttribute('data-index');
+            // Находим имя удаляемого товара, чтобы "отжать" кнопку в списке
+            const removedItemName = cart[index].name;
+
             cart.splice(index, 1);
             updateCartUI();
-        }
 
-        // ОТКРЫТИЕ/ЗАКРЫТИЕ ЧАТА (Больше не закомментировано!)
-        const chatToggleBtn = e.target.closest('#chat-toggle-btn');
-        const chatCloseBtn = e.target.closest('#chat-close-btn');
-        const chatWindow = document.getElementById('chat-window');
-
-        if (chatToggleBtn && chatWindow) {
-            chatWindow.classList.toggle('d-none');
-        }
-        if (chatCloseBtn && chatWindow) {
-            chatWindow.classList.add('d-none');
-        }
-
-        // ==========================================
-        // ЛОГИКА ПОИСКА ПО САЙТУ
-        // ==========================================
-        const searchInput = document.getElementById('main-search-input');
-        const searchBtn = document.getElementById('main-search-btn');
-
-        // Словарь: что ищем -> какой ID вкладки открываем
-        const searchMap = {
-            'вет': '#pills-vet',
-            'врач': '#pills-vet',
-            'передерж': '#pills-home',
-            'отель': '#pills-home',
-            'выгул': '#pills-walk',
-            'погуля': '#pills-walk',
-            'грум': '#pills-grooming',
-            'стриж': '#pills-grooming',
-            'такси': '#pills-taxi',
-            'машин': '#pills-taxi'
-        };
-
-        function performSearch() {
-            if (!searchInput) return;
-            const query = searchInput.value.toLowerCase().trim();
-
-            if (query === "") return;
-
-            let found = false;
-
-            // Проверяем наш словарь на совпадения
-            for (let key in searchMap) {
-                if (query.includes(key)) {
-                    const targetTabId = searchMap[key];
-                    const tabTrigger = document.querySelector(`button[data-bs-target="${targetTabId}"]`);
-
-                    if (tabTrigger) {
-                        // 1. Кликаем по нужной вкладке
-                        tabTrigger.click();
-                        // 2. Скроллим к разделу услуг
-                        document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
-                        found = true;
-                        break;
-                    }
+            // Синхронизируем кнопки в списке: находим кнопку этого эксперта и возвращаем ей вид "плюс"
+            document.querySelectorAll('.expert-card').forEach(card => {
+                if (card.querySelector('h5').textContent === removedItemName) {
+                    const btn = card.querySelector('.add-to-cart-btn');
+                    const icon = btn.querySelector('i');
+                    btn.classList.replace('btn-success', 'btn-warning');
+                    if (icon) icon.classList.replace('fa-check', 'fa-plus');
                 }
-            }
-
-            if (!found) {
-                alert("Услуга не найдена. Попробуйте ввести: Ветеринар, Груминг, Выгул или Такси");
-            }
+            });
         }
 
-        // Поиск по клику на лупу
-        if (searchBtn) searchBtn.onclick = performSearch;
+        // ==========================================
+        // 2. ВАЛИДАЦИЯ И ОТПРАВКА ЗАЯВКИ
+        // ==========================================
+        const requestBtn = e.target.closest('#send-request-btn');
 
-        // Поиск по нажатию Enter
-        if (searchInput) {
-            searchInput.onkeypress = (e) => {
-                if (e.key === 'Enter') performSearch();
-            };
+        if (requestBtn) {
+            // КРИТИЧНО: Останавливаем перезагрузку страницы сразу!
+            e.preventDefault();
+
+            const nameInput = document.getElementById('userName');
+            const phoneInput = document.getElementById('userPhone');
+            const serviceSelect = document.getElementById('userService');
+
+            // 1. Простая валидация
+            const nameValue = nameInput ? nameInput.value.trim() : "";
+            const phoneValue = phoneInput ? phoneInput.value.replace(/\D/g, '') : "";
+
+            if (nameValue.length < 2) {
+                alert('Пожалуйста, введите ваше имя');
+                if (nameInput) nameInput.focus();
+                return; // Прерываем выполнение, чтобы не скроллило и не отправляло
+            }
+
+            if (phoneValue.length < 11) {
+                alert('Введите корректный номер телефона (11 цифр)');
+                if (phoneInput) phoneInput.focus();
+                return;
+            }
+
+            // 2. Если прошли валидацию — отправляем в Метрику
+            if (typeof ym !== 'undefined') {
+                ym(108784033, 'reachGoal', 'lead_success');
+                console.log('Цель lead_success успешно улетела в Метрику');
+            }
+
+            // 3. Показываем сообщение
+            alert('Спасибо! Ваша заявка принята. Менеджер свяжется с вами в течение 5 минут.');
+
+            // 4. Очищаем форму и визуально меняем кнопку
+            const contactForm = e.target.closest('form');
+            if (contactForm) {
+                contactForm.reset();
+            }
+
+            requestBtn.disabled = true;
+            requestBtn.innerText = 'Отправлено ✓';
+            requestBtn.classList.replace('btn-warning', 'btn-secondary');
         }
+
+        // Остальной ваш код (Чат, Поиск...)
+        // ...
     });
 
     // 4. ОТПРАВКА СООБЩЕНИЙ В ЧАТЕ
