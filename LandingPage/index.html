@@ -26,10 +26,14 @@
                 </ul>
             </div>
 
-            <div class="cart-icon">
+            <div class="cart-icon" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" style="cursor: pointer;">
                 <i class="fa-solid fa-shopping-bag"></i>
-                <span class="badge rounded-pill text-bg-warning">0</span>
+                <span id="cart-badge" class="badge rounded-pill text-bg-warning d-none">0</span>
             </div>
+            <!--<div class="cart-icon">
+        <i class="fa-solid fa-shopping-bag"></i>
+        <span class="badge rounded-pill text-bg-warning">0</span>
+    </div>-->
         </div>
     </nav>
 
@@ -40,12 +44,20 @@
 
             <div class="search-box mx-auto">
                 <div class="input-group">
-                    <input type="text" class="form-control rounded-pill search-input" placeholder="Передержка...">
-                    <button class="btn btn-warning rounded-circle search-btn" type="button">
+                    <input type="text" id="main-search-input" class="form-control rounded-pill search-input" placeholder="Например: Ветеринар или Груминг">
+                    <button id="main-search-btn" class="btn btn-warning rounded-circle search-btn" type="button">
                         <i class="fa-solid fa-search text-white"></i>
                     </button>
                 </div>
             </div>
+            <!--<div class="search-box mx-auto">
+        <div class="input-group">
+            <input type="text" class="form-control rounded-pill search-input" placeholder="Передержка...">
+            <button class="btn btn-warning rounded-circle search-btn" type="button">
+                <i class="fa-solid fa-search text-white"></i>
+            </button>
+        </div>
+    </div>-->
         </div>
     </header>
 
@@ -671,7 +683,9 @@
                                 <option selected>Выберите услугу...</option>
                                 <option value="1">Передержка</option>
                                 <option value="2">Ветеринар</option>
-                                <option value="3">Выгул</option>
+                                <option value="3">Грумминг</option>
+                                <option value="4">Выгул</option>
+                                <option value="5">Зоотакси</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-warning w-100 rounded-pill fw-bold text-white py-2">Оставить заявку</button>
@@ -693,6 +707,56 @@
             </div>
         </div>
     </footer>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+        <div class="offcanvas-header bg-light">
+            <h5 class="offcanvas-title fw-bold" id="cartOffcanvasLabel"><i class="fa-solid fa-basket-shopping text-warning me-2"></i>Ваш заказ</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column">
+            <ul class="list-group mb-3" id="cart-items-list">
+                <li class="list-group-item text-center text-muted">Корзина пока пуста</li>
+            </ul>
+
+            <div class="d-flex justify-content-between fw-bold fs-5 mb-4 border-top pt-3">
+                <span>Итого:</span>
+                <span id="cart-total">0 ₽</span>
+            </div>
+
+            <form id="checkout-form" class="mt-auto">
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Ваше имя" required>
+                </div>
+                <div class="mb-3">
+                    <input type="tel" class="form-control" placeholder="Ваш телефон" required>
+                </div>
+                <button type="submit" class="btn btn-warning w-100 fw-bold text-white shadow-sm">Оформить заказ</button>
+            </form>
+        </div>
+    </div>
+
+    <button id="chat-toggle-btn" class="btn btn-warning rounded-circle shadow-lg text-white d-flex justify-content-center align-items-center">
+        <i class="fa-solid fa-comment-dots fs-3"></i>
+    </button>
+
+    <div id="chat-window" class="shadow-lg rounded-4 d-none bg-white">
+        <div class="chat-header bg-warning text-white p-3 rounded-top-4 d-flex justify-content-between align-items-center">
+            <span class="fw-bold"><i class="fa-solid fa-headset me-2"></i>Поддержка</span>
+            <button id="chat-close-btn" class="btn-close btn-close-white" aria-label="Close"></button>
+        </div>
+        <div class="chat-body p-3" style="height: 250px; overflow-y: auto; background-color: #f8f9fa;">
+            <div class="bg-white p-2 rounded-3 shadow-sm mb-2" style="width: 85%;">
+                <p class="small mb-0">Здравствуйте! 👋 Я онлайн-ассистент сервиса "Лапки в Дом". Помочь вам с выбором специалиста или оформлением заказа?</p>
+                <small class="text-muted" style="font-size: 0.7rem;">Только что</small>
+            </div>
+        </div>
+        <div class="chat-footer p-2 border-top bg-white rounded-bottom-4">
+            <div class="input-group">
+                <input type="text" class="form-control form-control-sm" placeholder="Напишите сообщение...">
+                <button class="btn btn-outline-warning btn-sm" type="button"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -376,3 +376,37 @@ footer .social-links a {
     footer .social-links a:hover {
         color: #F89F1E !important; /* Иконки соцсетей становятся оранжевыми при наведении */
     }
+
+/* ================= СТИЛИ ЧАТА ================= */
+#chat-toggle-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+    #chat-toggle-btn:hover {
+        transform: scale(1.1);
+    }
+
+#chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 320px;
+    z-index: 1000;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+/* Для мобильных устройств делаем чат на весь экран или чуть меньше */
+@media (max-width: 576px) {
+    #chat-window {
+        width: 90%;
+        right: 5%;
+        bottom: 90px;
+    }
+}
