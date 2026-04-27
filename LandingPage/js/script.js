@@ -77,6 +77,65 @@ document.addEventListener('DOMContentLoaded', function () {
         if (cartTotal) cartTotal.textContent = totalSum + ' ₽';
     }
 
+    // Функция для показа сообщений в корзине
+    function showCartMessage(text, type = 'danger') {
+        const container = document.getElementById('cart-message-container');
+        if (!container) return;
+
+        // Создаем красивое уведомление Bootstrap
+        container.innerHTML = `
+        <div class="alert alert-${type} alert-dismissible fade show small" role="alert">
+            ${text}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `;
+
+        // Автоматически скрываем сообщение через 4 секунды (если это не успех)
+        if (type !== 'success') {
+            setTimeout(() => {
+                const alert = container.querySelector('.alert');
+                if (alert) {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }
+            }, 4000);
+        }
+    }
+
+    // ОБНОВЛЕННЫЙ ОБРАБОТЧИК ФОРМЫ
+    const checkoutForm = document.getElementById('checkout-form');
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // 1. Проверка на пустую корзину
+            if (cart.length === 0) {
+                showCartMessage("Ваша корзина пуста! Выберите хотя бы одну услугу.", "warning");
+                return; // Прерываем выполнение, форма не отправится
+            }
+
+            // 2. Имитация отправки данных
+            // Здесь можно собрать данные: const name = this.querySelector('input[type="text"]').value;
+
+            // 3. Сообщение об успехе
+            showCartMessage("✨ Заказ оформлен! Менеджер свяжется с вами в течение 10 минут.", "success");
+
+            // 4. Очистка корзины и данных
+            cart = []; // Очищаем массив
+            updateCartUI(); // Обновляем интерфейс (счетчик и список)
+            checkoutForm.reset(); // Сбрасываем поля формы
+
+            // 5. Опционально: закрываем корзину через 3 секунды после успеха
+            setTimeout(() => {
+                const offcanvasEl = document.getElementById('cartOffcanvas');
+                const instance = bootstrap.Offcanvas.getInstance(offcanvasEl);
+                if (instance) instance.hide();
+                // Очищаем сообщение, чтобы при следующем открытии было пусто
+                document.getElementById('cart-message-container').innerHTML = '';
+            }, 5000);
+        });
+    }
+
     document.addEventListener('click', function (e) {
         // Добавление в корзину
         const addBtn = e.target.closest('.add-to-cart-btn');
